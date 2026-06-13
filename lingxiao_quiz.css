@@ -559,17 +559,36 @@ h1 {
 }
 
 .score-board {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
   margin-top: 1rem;
 }
 
 .score-pill {
+  display: grid;
+  gap: 0.12rem;
   border: 1px solid rgba(199, 166, 90, 0.22);
-  padding: 0.38rem 0.55rem;
+  padding: 0.5rem 0.55rem;
   color: rgba(239, 225, 191, 0.72);
   font-size: 0.78rem;
+  background: rgba(239, 225, 191, 0.035);
+}
+
+.score-pill strong {
+  color: var(--gold-soft);
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+}
+
+.score-pill span {
+  color: #fff3d5;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.score-pill small {
+  color: rgba(239, 225, 191, 0.52);
 }
 
 .action-row {

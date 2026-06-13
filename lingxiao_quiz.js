@@ -323,6 +323,7 @@ function getWinningResult() {
 function renderResult() {
   const result = getWinningResult();
   const fragment = resultTemplate.content.cloneNode(true);
+  const percentages = getScorePercentages(result.name);
 
   fragment.querySelector(".result-image").src = result.image;
   fragment.querySelector(".result-image").alt = result.polishedName;
@@ -338,7 +339,11 @@ function renderResult() {
   state.data.resultGroups[state.gender].forEach((roleName) => {
     const pill = document.createElement("span");
     pill.className = "score-pill";
-    pill.textContent = `${roleName} ${state.scores[roleName] || 0}`;
+    pill.innerHTML = `
+      <strong>${roleName}</strong>
+      <span>${percentages[roleName]}%</span>
+      <small>${state.scores[roleName] || 0} 分</small>
+    `;
     scoreBoard.appendChild(pill);
   });
 
@@ -348,12 +353,31 @@ function renderResult() {
   replaceView(fragment);
 }
 
+function getScorePercentages(winnerName) {
+  const roleNames = state.data.resultGroups[state.gender];
+  const total = roleNames.reduce((sum, roleName) => sum + Math.max(0, state.scores[roleName] || 0), 0);
+
+  if (total <= 0) {
+    return Object.fromEntries(roleNames.map((roleName) => [roleName, roleName === winnerName ? 100 : 0]));
+  }
+
+  return Object.fromEntries(roleNames.map((roleName) => {
+    const score = Math.max(0, state.scores[roleName] || 0);
+    return [roleName, Math.round((score / total) * 100)];
+  }));
+}
+
 async function copyResult(result) {
+  const percentages = getScorePercentages(result.name);
+  const percentageText = state.data.resultGroups[state.gender]
+    .map((roleName) => `${roleName} ${percentages[roleName]}%`)
+    .join("｜");
   const text = [
     `怪談事務所｜靈校心測`,
     `身份判定｜${result.polishedName}`,
     `異常指數｜${result.abnormalIndex}`,
     `訊號穩定度｜${result.signalStability}%`,
+    `匹配頻率｜${percentageText}`,
     `檔案評語｜${result.fileComment}`,
     `事務所備註｜${result.officeNote}`,
     `劇本定位｜${result.scriptPosition}`,
