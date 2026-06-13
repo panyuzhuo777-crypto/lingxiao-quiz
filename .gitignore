@@ -1,0 +1,5 @@
+.DS_Store
+.site-work/
+node_modules/
+dist/
+*.log

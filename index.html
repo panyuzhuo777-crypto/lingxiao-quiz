@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>怪談事務所｜靈校心測</title>
+  <meta name="description" content="聚散電台接收到一宗靈校怪談委託，請完成測驗，確認你在事件中的身份。">
+  <link rel="stylesheet" href="lingxiao_quiz.css">
+</head>
+<body>
+  <div class="site-shell">
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <div class="scanlines"></div>
+
+    <header class="top-signal" aria-label="聚散電台狀態列">
+      <div class="brand-mark">
+        <span class="rec-dot" aria-hidden="true"></span>
+        <span>聚散電台｜怪談事務所</span>
+      </div>
+      <div class="signal-code">AM 00:13 / NOISE 04</div>
+    </header>
+
+    <main class="quiz-frame" id="app" aria-live="polite">
+      <section class="panel hero-panel" data-view="loading">
+        <p class="eyebrow">The Truth Frequency</p>
+        <h1>怪談事務所｜靈校心測</h1>
+        <p class="subtitle">午夜訊號接入中，請確認你的靈異體質。</p>
+        <div class="loading-bar" aria-label="訊號讀取中">
+          <span></span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="brand-footer">
+      <strong>好劇好散推理館</strong>
+      <span>The Truth Frequency</span>
+      <span>—— 今夜，真相屬於你。 ——</span>
+    </footer>
+  </div>
+
+  <template id="home-template">
+    <section class="panel hero-panel view-enter">
+      <div class="hero-visual" aria-hidden="true">
+        <div class="frequency-lines"></div>
+        <div class="radio-dial">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <p class="eyebrow">聚散電台特別頻道｜怪談事務所</p>
+      <h1>怪談事務所｜靈校心測</h1>
+      <p class="subtitle">你不是誤入校園，是被寫進怪談裡的人。</p>
+      <p class="atmosphere">午夜廣播響起後，走廊盡頭多了一張沒有姓名的學生名牌。</p>
+
+      <div class="briefing-card">
+        <p>午夜訊號接入中……</p>
+        <p>一宗來自靈校的委託，已被送進怪談事務所。</p>
+        <p>請先選擇你的角色版本，完成本次靈異身份判定。</p>
+      </div>
+
+      <div class="gender-grid" role="group" aria-label="選擇角色版本">
+        <button class="choice-card" type="button" data-start="male">
+          <span class="choice-kicker">FILE M</span>
+          <strong>男生角色版</strong>
+          <small>前田／遼新／明堂</small>
+        </button>
+        <button class="choice-card" type="button" data-start="female">
+          <span class="choice-kicker">FILE F</span>
+          <strong>女生角色版</strong>
+          <small>涼宛／杰妮／天柔</small>
+        </button>
+      </div>
+      <p class="source-status" id="source-status"></p>
+    </section>
+  </template>
+
+  <template id="question-template">
+    <section class="panel question-panel view-enter">
+      <div class="case-meta">
+        <span class="case-id"></span>
+        <span class="progress-text"></span>
+      </div>
+      <div class="progress-track" aria-hidden="true"><span></span></div>
+      <p class="case-title"></p>
+      <h2 class="question-text"></h2>
+      <div class="options-list"></div>
+      <p class="microcopy">請選擇最接近你的頻率。選擇後，系統將自動進入下一份檔案。</p>
+    </section>
+  </template>
+
+  <template id="result-template">
+    <section class="panel result-panel view-enter">
+      <div class="result-file">
+        <div class="file-header">
+          <span>怪談事務所檔案卡</span>
+          <span class="stamp">IDENTIFIED</span>
+        </div>
+        <div class="result-layout">
+          <figure class="portrait-frame">
+            <img class="result-image" alt="">
+          </figure>
+          <div class="result-copy">
+            <p class="eyebrow">身份判定</p>
+            <h2 class="result-name"></h2>
+            <div class="meters">
+              <p><span>異常指數</span><strong class="abnormal-index"></strong></p>
+              <p><span>訊號穩定度</span><strong class="signal-stability"></strong></p>
+            </div>
+          </div>
+        </div>
+        <dl class="file-fields">
+          <div>
+            <dt>檔案評語</dt>
+            <dd class="file-comment"></dd>
+          </div>
+          <div>
+            <dt>事務所備註</dt>
+            <dd class="office-note"></dd>
+          </div>
+          <div>
+            <dt>劇本定位</dt>
+            <dd class="script-position"></dd>
+          </div>
+          <div>
+            <dt>聚散電台收尾</dt>
+            <dd class="radio-outro"></dd>
+          </div>
+        </dl>
+        <div class="score-board"></div>
+      </div>
+
+      <div class="action-row">
+        <button class="primary-action" type="button" data-copy>複製結果文案</button>
+        <button class="secondary-action" type="button" data-reset>重新測驗</button>
+      </div>
+      <p class="copy-status" role="status"></p>
+    </section>
+  </template>
+
+  <script src="lingxiao_quiz.js"></script>
+</body>
+</html>
